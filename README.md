@@ -7,7 +7,7 @@ This project demonstrates creating the same application using various frameworks
 Application can be run on windows and linux
 
 - For linux deb package example is provided
-- For windows application can be run as Windows service, Desktop App or Portable application
+- For windows application it can be run as Windows service, Desktop App or Portable application
 
 All required build scrips are provided
 
@@ -32,3 +32,5 @@ Some mode is a basic file management application. It allows to upload/download/d
 ### Linux
 
 - dpkg-deb
+
+**Note** By no means this application is perfect it can be improoved and it might contain bugs.

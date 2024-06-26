@@ -1,0 +1,120 @@
+{
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2016,
+    "sourceType": "module"
+  },
+  "extends": ["airbnb", "prettier"],
+  "env": {
+    "es6": true,
+    "jest": true,
+    "browser": true
+  },
+
+  "plugins": ["react", "jsx-a11y", "import", "import-helpers", "react-hooks", "prettier"],
+  "rules": {
+    "max-len": ["error", { "code": 180 }],
+    "prettier/prettier": "off",
+    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+    "import/prefer-default-export": "off",
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "react/jsx-one-expression-per-line": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/self-closing-comp": "off",
+    "global-require": "off",
+    "react-native/no-raw-text": "off",
+    "no-param-reassign": "off",
+    "no-underscore-dangle": "off",
+    "jsx-a11y/control-has-associated-label": "off",
+    "camelcase": "off",
+    "no-console": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "react/forbid-prop-types": 0,
+    "quotes": 0,
+    "@typescript-eslint/quotes": "off",
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always", // new line between groups
+        "groups": ["/^react$/", "module", "/^~/hooks/", "/^~/components/", "/^~/", ["parent", "sibling", "index"], "/styles/"],
+        "alphabetize": { "order": "asc", "ignoreCase": true }
+      }
+    ]
+  },
+
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "extends": ["plugin:react/recommended", "airbnb", "plugin:@typescript-eslint/recommended", "prettier", "plugin:prettier/recommended"],
+      "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+      },
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaFeatures": {
+          "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+      },
+      "plugins": ["react", "react-hooks", "import-helpers", "@typescript-eslint", "prettier"],
+      "rules": {
+        "prettier/prettier": "error",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+        "react/jsx-one-expression-per-line": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/jsx-curly-newline": "off",
+        "react/prop-types": "off",
+        "react/jsx-wrap-multilines": "off",
+        "import/prefer-default-export": "off",
+        "import/extensions": [
+          "error",
+          "ignorePackages",
+          {
+            "ts": "never",
+            "tsx": "never"
+          }
+        ],
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          {
+            "allowExpressions": true
+          }
+        ],
+        "import-helpers/order-imports": [
+          "warn",
+          {
+            "newlinesBetween": "always", // new line between groups
+            "groups": [
+              "/^react$/",
+              "module",
+              "/^components/",
+              "/^routes/",
+              "/^utils/",
+              "/^page/",
+              "/^hooks/",
+              "/^layouts/",
+              ["parent", "sibling", "index"],
+              "/styles/"
+            ],
+            "alphabetize": { "order": "asc", "ignoreCase": true }
+          }
+        ]
+      },
+      "settings": {
+        "import/resolver": {
+          "typescript": {}
+        }
+      }
+    }
+  ]
+}

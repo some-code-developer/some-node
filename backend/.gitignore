@@ -1,0 +1,16 @@
+node_modules
+*.exe
+*.zip
+some_node
+rcedit-x64.exe
+dist
+obj
+public
+log
+*.log
+*.res
+package-lock.json
+server.cer
+server.key
+data
+yarn.lock

@@ -1,0 +1,141 @@
+{
+  "name": "some_node",
+  "version": "0.0.1",
+  "description": "Some Node",
+  "main": "main.js",
+  "bin": "server.js",
+  "license": "Closed",
+  "private": true,
+  "author": {
+    "name": "Some Code Developer"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "dayjs": "^1.11.10",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "global": "^4.4.0",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "winston": "^3.13.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  },
+  "scripts": {
+    "build-exe": "build.bat",
+    "electron-start": "electron .",
+    "electron-pack": "electron-builder --dir",
+    "electron-dist": "electron-builder",
+    "upgrade": "npx npm-check-updates -u"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "transform": {
+      "^.+\\.[t|j]s?$": "babel-jest"
+    }
+  },
+  "devDependencies": {
+    "electron": "^30.0.1",
+    "electron-builder": "^24.13.3",
+    "electron-builder-squirrel-windows": "^24.13.3",
+    "eslint": "^8.57.0"
+  },
+  "resolutions": {
+    "node-abi": "^3.47.0"
+  },
+  "pkg": {
+    "scripts": [
+      "server/**/*.js"
+    ],
+    "assets": []
+  },
+  "build": {
+    "appId": "some.node",
+    "compression": "maximum",
+    "productName": "somenode",
+    "linux": {
+      "category": "Development"
+    },
+    "mac": {
+      "category": "Development"
+    },
+    "win": {
+      "target": "MSI"
+    },
+    "msi": {
+      "oneClick": true,
+      "perMachine": true,
+      "createDesktopShortcut": true
+    },
+    "asar": true,
+    "extraFiles": [
+      "public${/*}"
+    ],
+    "files": [
+      "**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,LICENCE,LICENSE,LICENSE.txt,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/**/{demo,build,deps,doc,docs,samples,benchmark,scss}/**/*",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/**/*.map",
+      "!**/node_modules/**/*.png",
+      "!**/node_modules/**/*.md",
+      "!**/node_modules/**/*.tgz",
+      "!**/node_modules/**/LICENSE",
+      "!**/node_modules/**/Makefile",
+      "!**/node_modules/**/license",
+      "!**/node_modules/**/LICENSE-MIT",
+      "!**/node_modules/**/readme",
+      "!**/node_modules/**/README.*",
+      "!**/node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!some_code",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{appveyor.yml,.travis.yml,circle.yml}",
+      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}",
+      "!src${/*}",
+      "!utils${/*}",
+      "!cmd${/*}",
+      "!.vscode${/*}",
+      "!connection${/*}",
+      "!imap4${/*}",
+      "!log${/*}",
+      "!office365${/*}",
+      "!performance${/*}",
+      "!settings*${/*}",
+      "!webpack*${/*}",
+      "!build*${/*}",
+      "!.babel*${/*}",
+      "!*.bat${/*}",
+      "!app.jsx${/*}",
+      "!server.js${/*}",
+      "!vite.config.js${/*}",
+      "!deploy*.sh${/*}",
+      "!*.key${/*}",
+      "!*.rc${/*}",
+      "!*.res${/*}",
+      "!.dockerignore${/*}",
+      "!.env${/*}",
+      "!*.sqlite${/*}",
+      "!server.cer${/*}",
+      "!server.key${/*}",
+      "!ToDo.md${/*}",
+      "!README.md${/*}",
+      "!Dockerfile${/*}",
+      "!app.js${/*}",
+      "!jsconfig.json${/*}",
+      "!setup${/*}",
+      "!data${/*}",
+      "!definitions${/*}",
+      "!dist${/*}",
+      "!public${/*}"
+    ]
+  }
+}

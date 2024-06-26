@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+PRODUCT=some-node
+
+case "$1" in
+  purge|remove)
+        # Remove backup env files
+        rm -f /etc/some-code.com/$PRODUCT/*.* || true
+        # Remove log files
+        rm -f /var/log/some-code.com/$PRODUCT/*.*|| true
+        # Remove ssl cert key
+        rm -f /var/lib/some-code.com/$PRODUCT/*.key|| true
+        # Remove ssl cert 
+        rm -f /var/lib/some-code.com/$PRODUCT/*.cer|| true
+        ;;
+esac
+
+exit 0

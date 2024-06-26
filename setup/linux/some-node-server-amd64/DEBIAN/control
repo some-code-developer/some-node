@@ -1,0 +1,9 @@
+Package: some-node-server
+Version: 0.0.1
+Section: base
+Priority: optional
+Architecture: amd64
+Installed-Size: 45000
+Maintainer: support@some-code.com
+Homepage: https://www.some-code.com
+Description: Runs Some Node Server as a service

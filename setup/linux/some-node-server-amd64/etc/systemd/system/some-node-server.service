@@ -1,0 +1,9 @@
+[Unit]
+Description=Some node server daemon
+[Service]
+WorkingDirectory=/opt/some-code.com/some-node
+ExecStart=/opt/some-code.com/some-node/some_node 
+SuccessExitStatus=143
+User=some-node
+[Install]
+WantedBy=multi-user.target

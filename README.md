@@ -33,4 +33,4 @@ Some mode is a basic file management application. It allows to upload/download/d
 
 - dpkg-deb
 
-**Note** By no means this application is perfect it can be improoved and it might contain bugs.
+**Note** By no means this application is perfect, It can be improoved and it might contain some bugs.

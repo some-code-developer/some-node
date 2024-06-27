@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 7
+    },
+    "auditLog": "/home/dbsl/NODE/some-node/backend/data/log/audit.json",
+    "files": [
+        {
+            "date": 1719488267281,
+            "name": "/home/dbsl/NODE/some-node/backend/data/log/2024-06-27.log",
+            "hash": "b918f064fafdfce0a58e2369a9ceeee958e51a896706146da6d02b5fea28f565"
+        }
+    ],
+    "hashType": "sha256"
+}

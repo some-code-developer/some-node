@@ -5,6 +5,7 @@ const ESLintPlugin = require("eslint-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   devtool: "source-map",
@@ -22,7 +23,12 @@ module.exports = {
   },
   resolve: {
     extensions: [".Webpack.js", ".web.js", ".ts", ".js", ".jsx", ".tsx"],
-    plugins: [new TsconfigPathsPlugin({ configFile: "./tsconfig.json", extensions: [".ts", ".js", ".jsx", ".tsx"] })],
+    plugins: [
+      new TsconfigPathsPlugin({
+        configFile: "./tsconfig.json",
+        extensions: [".ts", ".js", ".jsx", ".tsx"],
+      }),
+    ],
   },
 
   optimization: {
@@ -113,6 +119,9 @@ module.exports = {
       emitError: true,
       failOnError: false,
       failOnWarning: false,
+    }),
+    new CopyPlugin({
+      patterns: [{ from: "assets", to: ".." }],
     }),
   ],
 };

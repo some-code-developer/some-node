@@ -49,16 +49,26 @@ export function UploadDialogue({ props }) {
 
   const body = (
     <>
-      <div className="container-fluid">{!isValid && <ErrorMessage props={{ error }} />}</div>
+      <div className="container-fluid">
+        {!isValid && <ErrorMessage props={{ error }} />}
+      </div>
       <div className="container-fluid">
         <div className="input-group input-group-sm mb-3">
-          <input type="file" className="form-control" id="fu" accept={extension} onChange={onChangeFile} />
+          <input
+            type="file"
+            className="form-control"
+            id="fu"
+            accept={extension}
+            onChange={onChangeFile}
+          />
         </div>
       </div>
     </>
   );
 
-  const footer = <SaveCancel props={{ onSave: onOKClick, onCancel: onClose }} />;
+  const footer = (
+    <SaveCancel props={{ onSave: onOKClick, onCancel: onClose }} />
+  );
 
   return (
     <Dialogue

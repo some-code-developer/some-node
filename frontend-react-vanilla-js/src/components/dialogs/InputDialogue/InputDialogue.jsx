@@ -46,14 +46,22 @@ export function InputDialogue({ props }) {
 
   const body = (
     <>
-      <div className="container-fluid">{!isValid && <ErrorMessage props={{ error }} />}</div>
+      <div className="container-fluid">
+        {!isValid && <ErrorMessage props={{ error }} />}
+      </div>
       <div className="container-fluid">
         <div className="row mb-3">
           <div className="col">
             <label className="form-label form-label-sm" htmlFor="input">
               {label}
             </label>
-            <input type={type} className="form-control form-control-sm" defaultValue={defaultValue} id="input" onChange={onChangeValue} />
+            <input
+              type={type}
+              className="form-control form-control-sm"
+              defaultValue={defaultValue}
+              id="input"
+              onChange={onChangeValue}
+            />
           </div>
         </div>
       </div>
@@ -62,11 +70,19 @@ export function InputDialogue({ props }) {
 
   const footer = (
     <>
-      <button className="btn btn-sm btn-success border border-white me-2" type="button" onClick={onOKClick}>
+      <button
+        className="btn btn-sm btn-success border border-white me-2"
+        type="button"
+        onClick={onOKClick}
+      >
         <i className="bi bi-check-lg me-2" />
         OK
       </button>
-      <button className="btn btn-sm btn-secondary border border-white text-white me-2" type="button" onClick={onClose}>
+      <button
+        className="btn btn-sm btn-secondary border border-white text-white me-2"
+        type="button"
+        onClick={onClose}
+      >
         <i className="bi bi-arrow-counterclockwise me-2" />
         Cancel
       </button>

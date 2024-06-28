@@ -5,6 +5,7 @@ const BrotliPlugin = require("brotli-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: { app: "./src/index.tsx" },
@@ -106,6 +107,9 @@ module.exports = {
       test: /\.(js|css|html|svg)$/,
       threshold: 10240,
       minRatio: 0.8,
+    }),
+    new CopyPlugin({
+      patterns: [{ from: "assets", to: ".." }],
     }),
   ],
 };

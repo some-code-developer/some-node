@@ -37,7 +37,10 @@ function FileManager({ props }) {
         });
       else throw new Error(responseData.error);
     } catch (err) {
-      dispatch({ type: TYPES.SET_ERROR, payload: { error: getErrorMessage(err) } });
+      dispatch({
+        type: TYPES.SET_ERROR,
+        payload: { error: getErrorMessage(err) },
+      });
     }
   };
 
@@ -46,7 +49,10 @@ function FileManager({ props }) {
   }, [state.selectedPath]);
 
   const onChangeFilterHandler = (evt) => setFilter(evt.target.value);
-  const filteredData = () => state?.data.filter((row) => JSON.stringify(row).toUpperCase().includes(filter.toUpperCase()));
+  const filteredData = () =>
+    state?.data.filter((row) =>
+      JSON.stringify(row).toUpperCase().includes(filter.toUpperCase()),
+    );
 
   const getIcon = (isFile) => {
     if (isFile) return <i className="bi bi-file me-2" />;
@@ -70,16 +76,21 @@ function FileManager({ props }) {
       } else throw new Error(responseData.error);
       dispatch({ type: TYPES.HIDE_DIALOGUE });
     } catch (err) {
-      dispatch({ type: TYPES.SET_ERROR, payload: { error: getErrorMessage(err) } });
+      dispatch({
+        type: TYPES.SET_ERROR,
+        payload: { error: getErrorMessage(err) },
+      });
     }
   };
 
-  const onPathClick = (path) => dispatch({ type: TYPES.SET_PATH, payload: { selectedPath: path } });
+  const onPathClick = (path) =>
+    dispatch({ type: TYPES.SET_PATH, payload: { selectedPath: path } });
 
   const upFolder = () => {
     const folders = state.selectedPath.split("/");
     if (folders.length > 1) folders.pop();
-    if (folders.length <= 1) dispatch({ type: TYPES.SET_PATH, payload: { selectedPath: "/" } });
+    if (folders.length <= 1)
+      dispatch({ type: TYPES.SET_PATH, payload: { selectedPath: "/" } });
     else
       dispatch({
         type: TYPES.SET_PATH,
@@ -131,7 +142,10 @@ function FileManager({ props }) {
           throw err;
         });
     } catch (err) {
-      dispatch({ type: TYPES.SET_ERROR, payload: { error: getErrorMessage(err) } });
+      dispatch({
+        type: TYPES.SET_ERROR,
+        payload: { error: getErrorMessage(err) },
+      });
     }
   };
 
@@ -151,7 +165,10 @@ function FileManager({ props }) {
           });
         else throw new Error(responseData.error);
       } catch (err) {
-        dispatch({ type: TYPES.SET_ERROR, payload: { error: getErrorMessage(err) } });
+        dispatch({
+          type: TYPES.SET_ERROR,
+          payload: { error: getErrorMessage(err) },
+        });
       }
   };
 
@@ -252,8 +269,18 @@ function FileManager({ props }) {
                       title="Download File"
                       onClick={() => download(record)}
                     />
-                    <button type="button" className="btn btn-light bi-file" title="Rename" onClick={() => onShowRenameDialogue(record.name)} />
-                    <button type="button" className="btn btn-light bi-x" title="Delete" onClick={() => onDelete(record.name)} />
+                    <button
+                      type="button"
+                      className="btn btn-light bi-file"
+                      title="Rename"
+                      onClick={() => onShowRenameDialogue(record.name)}
+                    />
+                    <button
+                      type="button"
+                      className="btn btn-light bi-x"
+                      title="Delete"
+                      onClick={() => onDelete(record.name)}
+                    />
                   </div>
                 </td>
               </tr>
@@ -263,7 +290,10 @@ function FileManager({ props }) {
     );
   };
 
-  const getFile = () => (state.selectedPath === "/" ? `${state.selectedPath}${state.selectedItem}` : `${state.selectedPath}/${state.selectedItem}`);
+  const getFile = () =>
+    state.selectedPath === "/"
+      ? `${state.selectedPath}${state.selectedItem}`
+      : `${state.selectedPath}/${state.selectedItem}`;
 
   const body = (
     <>
@@ -274,16 +304,35 @@ function FileManager({ props }) {
       )}
 
       <div className="input-group input-group-sm pb-2">
-        <input type="text" className="form-control" disabled value={getFile()} title="Selected Path" />
+        <input
+          type="text"
+          className="form-control"
+          disabled
+          value={getFile()}
+          title="Selected Path"
+        />
       </div>
 
       <div className="input-group input-group-sm pb-2">
-        <input type="text" className="form-control" onChange={onChangeFilterHandler} value={filter} placeholder="Input search string..." />
-        <button className="btn btn-outline-secondary" type="button" onClick={() => setFilter("")}>
+        <input
+          type="text"
+          className="form-control"
+          onChange={onChangeFilterHandler}
+          value={filter}
+          placeholder="Input search string..."
+        />
+        <button
+          className="btn btn-outline-secondary"
+          type="button"
+          onClick={() => setFilter("")}
+        >
           Clear
         </button>
       </div>
-      <div className="overflow-auto" style={{ maxHeight: "80vh", height: "880vh" }}>
+      <div
+        className="overflow-auto"
+        style={{ maxHeight: "80vh", height: "880vh" }}
+      >
         {renderTable()}
       </div>
     </>
@@ -326,7 +375,13 @@ function FileManager({ props }) {
             Create Folder
           </button>
           <PathToolbar props={{ path: state.selectedPath, onPathClick }} />
-          <button type="button" className="btn btn-sm border me-0" title="Refresh" aria-label="Refresh" onClick={getData}>
+          <button
+            type="button"
+            className="btn btn-sm border me-0"
+            title="Refresh"
+            aria-label="Refresh"
+            onClick={getData}
+          >
             <i className="bi bi-arrow-repeat me-2" />
             Refresh
           </button>
@@ -347,7 +402,10 @@ function FileManager({ props }) {
       if (response.status === 400) throw new Error(responseData.error);
       getData();
     } catch (err) {
-      dispatch({ type: TYPES.SET_ERROR, payload: { error: getErrorMessage(err) } });
+      dispatch({
+        type: TYPES.SET_ERROR,
+        payload: { error: getErrorMessage(err) },
+      });
     }
   };
 
@@ -394,7 +452,10 @@ function FileManager({ props }) {
         dispatch({ type: TYPES.HIDE_DIALOGUE });
       } else throw new Error(responseData.error);
     } catch (err) {
-      dispatch({ type: TYPES.SET_ERROR, payload: { error: getErrorMessage(err) } });
+      dispatch({
+        type: TYPES.SET_ERROR,
+        payload: { error: getErrorMessage(err) },
+      });
     }
   };
 

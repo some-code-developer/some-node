@@ -11,9 +11,15 @@ function Layout({ children, title, description, keywords }) {
           <meta name="robots" content="index, follow" />
           <meta name="description" content={description} />
           <meta name="keywords" content={keywords} />
-          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
           <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-          <script type="text/javascript" src="/bootstrap/js/bootstrap.bundle.min.js" />
+          <script
+            type="text/javascript"
+            src="/bootstrap/js/bootstrap.bundle.min.js"
+          />
           <link rel="stylesheet" href="/bootstrap-icons/bootstrap-icons.css" />
         </Helmet>
         {children}

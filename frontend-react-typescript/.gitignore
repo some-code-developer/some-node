@@ -1,0 +1,12 @@
+node_modules
+dist
+obj
+public
+log
+*.log
+package-lock.json
+deep_bin.exe
+server.cer
+server.key
+data
+assets

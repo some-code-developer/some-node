@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 // Components
-import { ErrorMessage, SaveCancel, Dialogue } from '@shared/index';
+import { ErrorMessage, SaveCancel, Dialogue } from "@shared/index";
 
 export function UploadDialogue({ props }) {
   const { extension, onClose, onSave } = props;
 
-  const [error, setError] = useState(''); // Overall form error
+  const [error, setError] = useState(""); // Overall form error
   const [isValid, setIsValid] = useState(true); // Overall form status
 
   const [formData, setFormData] = useState(undefined); // File
@@ -14,20 +14,20 @@ export function UploadDialogue({ props }) {
   // Close dialogue on escape
   useEffect(() => {
     const closeDialogue = (e) => {
-      if (e.keyCode === 27) onClose();
+      if (e.key === "Escape") onClose();
       // Ctrl + S
-      if (e.ctrlKey && e.keyCode === 83) {
+      if (e.ctrlKey && e.key === "s") {
         onOKClick();
         e.preventDefault();
       }
     };
-    window.addEventListener('keydown', closeDialogue);
-    return () => window.removeEventListener('keydown', closeDialogue);
+    window.addEventListener("keydown", closeDialogue);
+    return () => window.removeEventListener("keydown", closeDialogue);
   }, [formData]);
 
   const setErrorMessage = () => {
     setIsValid(false);
-    setError('Please select the file');
+    setError("Please select the file");
   };
 
   const onChangeFile = async (evt) => {
@@ -37,8 +37,8 @@ export function UploadDialogue({ props }) {
       return;
     }
     const data = new FormData();
-    data.append('file', evt.target.files[0]);
-    data.append('fileName', evt.target.files[0].name);
+    data.append("file", evt.target.files[0]);
+    data.append("fileName", evt.target.files[0].name);
     setFormData(data);
   };
 
@@ -63,8 +63,8 @@ export function UploadDialogue({ props }) {
   return (
     <Dialogue
       props={{
-        id: 'UploadModal',
-        icon: 'bi-cloud-upload',
+        id: "UploadModal",
+        icon: "bi-cloud-upload",
         title: `Upload file (${extension})`,
         body,
         footer,

@@ -1,8 +1,8 @@
-import { useState, useEffect, FC, ChangeEvent } from 'react';
-import { getErrorMessage } from '@utils/form_utils';
+import { useState, useEffect, FC, ChangeEvent } from "react";
+import { getErrorMessage } from "@utils/form_utils";
 
 // Components
-import { ErrorMessage, Dialogue } from '@shared/index';
+import { ErrorMessage, Dialogue } from "@shared/index";
 
 interface IInputDialogueProps {
   props: {
@@ -19,22 +19,22 @@ interface IInputDialogueProps {
 const InputDialogue: FC<IInputDialogueProps> = ({ props }) => {
   const { label, type, icon, title, defaultValue, onClose, onSave } = props;
 
-  const [error, setError] = useState(''); // Overall form error
+  const [error, setError] = useState(""); // Overall form error
   const [isValid, setIsValid] = useState(true); // Overall form status
   const [value, setValue] = useState(defaultValue);
 
   // Close dialogue on escape
   useEffect(() => {
     const closeDialogue = (e: KeyboardEvent) => {
-      if (e.key === 'escape') onClose();
+      if (e.key === "Escape") onClose();
       // Ctrl + S
-      if (e.ctrlKey && e.key === 's') {
+      if (e.ctrlKey && e.key === "s") {
         onOKClick();
         e.preventDefault();
       }
     };
-    window.addEventListener('keydown', closeDialogue);
-    return () => window.removeEventListener('keydown', closeDialogue);
+    window.addEventListener("keydown", closeDialogue);
+    return () => window.removeEventListener("keydown", closeDialogue);
   }, [value]);
 
   const setErrorMessage = () => {
@@ -88,7 +88,7 @@ const InputDialogue: FC<IInputDialogueProps> = ({ props }) => {
   return (
     <Dialogue
       props={{
-        id: 'InputModal',
+        id: "InputModal",
         icon,
         title,
         body,

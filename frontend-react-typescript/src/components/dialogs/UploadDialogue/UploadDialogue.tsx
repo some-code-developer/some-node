@@ -1,7 +1,7 @@
-import { useState, useEffect, ChangeEvent, FC } from 'react';
+import { useState, useEffect, ChangeEvent, FC } from "react";
 
 // Components
-import { ErrorMessage, SaveCancel, Dialogue } from '@shared/index';
+import { ErrorMessage, SaveCancel, Dialogue } from "@shared/index";
 
 interface IUploadDialogueProps {
   props: {
@@ -13,7 +13,7 @@ interface IUploadDialogueProps {
 const UploadDialogue: FC<IUploadDialogueProps> = ({ props }) => {
   const { extension, onClose, onSave } = props;
 
-  const [error, setError] = useState(''); // Overall form error
+  const [error, setError] = useState(""); // Overall form error
   const [isValid, setIsValid] = useState(true); // Overall form status
 
   const [formData, setFormData] = useState<unknown>(); // File
@@ -21,20 +21,20 @@ const UploadDialogue: FC<IUploadDialogueProps> = ({ props }) => {
   // Close dialogue on escape
   useEffect(() => {
     const closeDialogue = (e: KeyboardEvent) => {
-      if (e.key === 'escape') onClose();
+      if (e.key === "Escape") onClose();
       // Ctrl + S
-      if (e.ctrlKey && e.key === 's') {
+      if (e.ctrlKey && e.key === "s") {
         onOKClick();
         e.preventDefault();
       }
     };
-    window.addEventListener('keydown', closeDialogue);
-    return () => window.removeEventListener('keydown', closeDialogue);
+    window.addEventListener("keydown", closeDialogue);
+    return () => window.removeEventListener("keydown", closeDialogue);
   }, [formData]);
 
   const setErrorMessage = () => {
     setIsValid(false);
-    setError('Please select the file');
+    setError("Please select the file");
   };
 
   const onChangeFile = async (evt: ChangeEvent<HTMLInputElement>) => {
@@ -44,8 +44,8 @@ const UploadDialogue: FC<IUploadDialogueProps> = ({ props }) => {
       return;
     }
     const data = new FormData();
-    data.append('file', evt.target.files[0]);
-    data.append('fileName', evt.target.files[0].name);
+    data.append("file", evt.target.files[0]);
+    data.append("fileName", evt.target.files[0].name);
     setFormData(data);
   };
 
@@ -70,8 +70,8 @@ const UploadDialogue: FC<IUploadDialogueProps> = ({ props }) => {
   return (
     <Dialogue
       props={{
-        id: 'UploadModal',
-        icon: 'bi-cloud-upload',
+        id: "UploadModal",
+        icon: "bi-cloud-upload",
         title: `Upload file (${extension})`,
         body,
         footer,

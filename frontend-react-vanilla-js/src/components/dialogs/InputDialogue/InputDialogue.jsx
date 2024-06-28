@@ -1,27 +1,27 @@
-import { useState, useEffect } from 'react';
-import { getErrorMessage } from '@utils/form_utils';
+import { useState, useEffect } from "react";
+import { getErrorMessage } from "@utils/form_utils";
 // Components
-import { ErrorMessage, Dialogue } from '@shared/index';
+import { ErrorMessage, Dialogue } from "@shared/index";
 
 export function InputDialogue({ props }) {
   const { label, type, icon, title, defaultValue, onClose, onSave } = props;
 
-  const [error, setError] = useState(''); // Overall form error
+  const [error, setError] = useState(""); // Overall form error
   const [isValid, setIsValid] = useState(true); // Overall form status
   const [value, setValue] = useState(defaultValue);
 
   // Close dialogue on escape
   useEffect(() => {
     const closeDialogue = (e) => {
-      if (e.keyCode === 27) onClose();
+      if (e.key === "Escape") onClose();
       // Ctrl + S
-      if (e.ctrlKey && e.keyCode === 83) {
+      if (e.ctrlKey && e.key === "s") {
         onOKClick();
         e.preventDefault();
       }
     };
-    window.addEventListener('keydown', closeDialogue);
-    return () => window.removeEventListener('keydown', closeDialogue);
+    window.addEventListener("keydown", closeDialogue);
+    return () => window.removeEventListener("keydown", closeDialogue);
   }, [value]);
 
   const setErrorMessage = () => {
@@ -76,7 +76,7 @@ export function InputDialogue({ props }) {
   return (
     <Dialogue
       props={{
-        id: 'InputModal',
+        id: "InputModal",
         icon,
         title,
         body,

@@ -1,16 +1,16 @@
 /* eslint-disable no-restricted-globals */
-import { ReactElement, useEffect, useReducer, FC, ChangeEvent } from 'react';
-import { useStickyState } from '@hooks/index';
-import { getErrorMessage } from '@utils/form_utils';
+import { ReactElement, useEffect, useReducer, FC, ChangeEvent } from "react";
+import { useStickyState } from "@hooks/index";
+import { getErrorMessage } from "@utils/form_utils";
 
 // Components
-import { ErrorMessage, Layout } from '@shared/index';
-import PathToolbar from './PathToolbar';
-import { UploadDialogue, InputDialogue } from '@dialogs/index';
-import { postJSON } from '../utils/form_utils';
+import { ErrorMessage, Layout } from "@shared/index";
+import PathToolbar from "./PathToolbar";
+import { UploadDialogue, InputDialogue } from "@dialogs/index";
+import { postJSON } from "../utils/form_utils";
 
-import { ActionType, IState, IItem } from './types';
-import { reducer } from './reducer';
+import { ActionType, IState, IItem } from "./types";
+import { reducer } from "./reducer";
 
 interface IFileManagerProps {
   props: {
@@ -21,10 +21,10 @@ interface IFileManagerProps {
 const INITIAL_STATE: IState = {
   data: [],
   isLoading: true,
-  error: '',
+  error: "",
   isFailed: false,
-  selectedPath: '/',
-  selectedItem: '',
+  selectedPath: "/",
+  selectedItem: "",
 };
 
 const FileManager: FC<IFileManagerProps> = ({ props }) => {
@@ -32,16 +32,16 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
 
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
-  const [filter, setFilter] = useStickyState('', 'fileSelectFilter'); // Filter
+  const [filter, setFilter] = useStickyState("", "fileSelectFilter"); // Filter
 
   const getData = async (): Promise<void> => {
     try {
       // Initial assignment
       let selectedPath;
       if (state.selectedPath) selectedPath = state.selectedPath;
-      else selectedPath = path ? path : '/';
+      else selectedPath = path ? path : "/";
       dispatch({ type: ActionType.SET_LOADING });
-      const response = await postJSON('/api/file-manager/list', {
+      const response = await postJSON("/api/file-manager/list", {
         selectedPath,
       });
       const responseData = await response.json();
@@ -71,7 +71,7 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
   const createNewFolder = async (newFolder: string): Promise<void> => {
     try {
       dispatch({ type: ActionType.SET_LOADING });
-      const response = await postJSON('/api/file-manager/create', {
+      const response = await postJSON("/api/file-manager/create", {
         selectedPath: state.selectedPath,
         newFolder,
       });
@@ -92,21 +92,21 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
   const onPathClick = (path: string): void => dispatch({ type: ActionType.SET_PATH, payload: { selectedPath: path } });
 
   const upFolder = (): void => {
-    const folders = state?.selectedPath?.split('/');
+    const folders = state?.selectedPath?.split("/");
     if (folders) {
       if (folders.length > 1) folders.pop();
-      if (folders.length <= 1) dispatch({ type: ActionType.SET_PATH, payload: { selectedPath: '/' } });
+      if (folders.length <= 1) dispatch({ type: ActionType.SET_PATH, payload: { selectedPath: "/" } });
       else
         dispatch({
           type: ActionType.SET_PATH,
-          payload: { selectedPath: folders.join('/') },
+          payload: { selectedPath: folders.join("/") },
         });
     }
   };
 
   const downFolder = (record: IItem): void => {
     if (record.isFile) return;
-    if (state.selectedPath === '/')
+    if (state.selectedPath === "/")
       dispatch({
         type: ActionType.SET_PATH,
         payload: { selectedPath: `${state.selectedPath}${record.name}` },
@@ -122,14 +122,14 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
     if (!record.isFile) return;
     try {
       dispatch({ type: ActionType.SET_LOADING });
-      fetch('/api/file-manager/download', {
-        method: 'POST',
+      fetch("/api/file-manager/download", {
+        method: "POST",
         body: JSON.stringify({
           selectedPath: state.selectedPath,
           name: record.name,
         }),
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       })
         .then((res) => {
@@ -137,9 +137,9 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
         })
         .then((blob) => {
           const href = window.URL.createObjectURL(blob);
-          const link = document.createElement('a');
+          const link = document.createElement("a");
           link.href = href;
-          link.setAttribute('download', record.name);
+          link.setAttribute("download", record.name);
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
@@ -156,7 +156,7 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
     if (confirm(`Delete file/folder ${item} ?`))
       try {
         dispatch({ type: ActionType.SET_LOADING });
-        const response = await postJSON('/api/file-manager/delete', {
+        const response = await postJSON("/api/file-manager/delete", {
           selectedPath: state.selectedPath,
           selectedItem: item,
         });
@@ -185,7 +185,7 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
           </tr>
         </thead>
         <tbody className="table-group-divider">
-          {state.selectedPath !== '/' && (
+          {state.selectedPath !== "/" && (
             <tr key={-1} onClick={() => upFolder()}>
               <td>
                 {getIcon(false)}
@@ -281,7 +281,7 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
   };
 
   const getFile = (): string =>
-    state.selectedPath === '/' ? `${state.selectedPath}${state.selectedItem}` : `${state.selectedPath}/${state.selectedItem}`;
+    state.selectedPath === "/" ? `${state.selectedPath}${state.selectedItem}` : `${state.selectedPath}/${state.selectedItem}`;
 
   const body = (
     <>
@@ -297,11 +297,11 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
 
       <div className="input-group input-group-sm pb-2">
         <input type="text" className="form-control" onChange={onChangeFilterHandler} value={filter} placeholder="Input search string..." />
-        <button className="btn btn-outline-secondary" type="button" onClick={() => setFilter('')}>
+        <button className="btn btn-outline-secondary" type="button" onClick={() => setFilter("")}>
           Clear
         </button>
       </div>
-      <div className="overflow-auto" style={{ maxHeight: '80vh', height: '880vh' }}>
+      <div className="overflow-auto" style={{ maxHeight: "80vh", height: "880vh" }}>
         {renderTable()}
       </div>
     </>
@@ -322,7 +322,7 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
             onClick={() =>
               dispatch({
                 type: ActionType.SHOW_DIALOGUE,
-                payload: { showDialogue: 'upload' },
+                payload: { showDialogue: "upload" },
               })
             }
           >
@@ -336,14 +336,14 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
             onClick={() =>
               dispatch({
                 type: ActionType.SHOW_DIALOGUE,
-                payload: { showDialogue: 'createFolder' },
+                payload: { showDialogue: "createFolder" },
               })
             }
           >
             <i className="bi bi-folder-plus me-2" />
             Create Folder
           </button>
-          <PathToolbar props={{ path: state.selectedPath ? state.selectedPath : '/', onPathClick }} />
+          <PathToolbar props={{ path: state.selectedPath ? state.selectedPath : "/", onPathClick }} />
           <button type="button" className="btn btn-sm border me-0" title="Refresh" aria-label="Refresh" onClick={getData}>
             <i className="bi bi-arrow-repeat me-2" />
             Refresh
@@ -356,10 +356,10 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
   const onUpload = async (formData: FormData) => {
     dispatch({ type: ActionType.HIDE_DIALOGUE });
     if (state.selectedPath) {
-      formData.append('selectedPath', state.selectedPath);
+      formData.append("selectedPath", state.selectedPath);
       try {
         const response = await fetch(`/api/file-manager/upload`, {
-          method: 'POST',
+          method: "POST",
           body: formData,
         });
         const responseData = await response.json();
@@ -375,10 +375,10 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
   };
 
   const uploadDialogue =
-    state.showDialogue === 'upload' ? (
+    state.showDialogue === "upload" ? (
       <UploadDialogue
         props={{
-          extension: '*.*',
+          extension: "*.*",
           onClose: () => dispatch({ type: ActionType.HIDE_DIALOGUE }),
           onSave: onUpload,
         }}
@@ -386,14 +386,14 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
     ) : null;
 
   const createFolderDialogue =
-    state.showDialogue === 'createFolder' ? (
+    state.showDialogue === "createFolder" ? (
       <InputDialogue
         props={{
-          label: 'Folder',
-          type: 'text',
-          icon: 'bi-folder-plus',
-          title: 'Create New Folder',
-          defaultValue: '',
+          label: "Folder",
+          type: "text",
+          icon: "bi-folder-plus",
+          title: "Create New Folder",
+          defaultValue: "",
           onSave: createNewFolder,
           onClose: () => dispatch({ type: ActionType.HIDE_DIALOGUE }),
         }}
@@ -403,7 +403,7 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
   const onRename = async (newItem: string) => {
     try {
       dispatch({ type: ActionType.SET_LOADING });
-      const response = await postJSON('/api/file-manager/rename', {
+      const response = await postJSON("/api/file-manager/rename", {
         selectedPath: state.selectedPath,
         selectedItem: state.selectedItem,
         newItem,
@@ -425,18 +425,18 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
     dispatch({ type: ActionType.SET_ITEM, payload: { selectedItem: item } });
     dispatch({
       type: ActionType.SHOW_DIALOGUE,
-      payload: { showDialogue: 'renameDialogue' },
+      payload: { showDialogue: "renameDialogue" },
     });
   };
 
   const renameDialogue =
-    state.showDialogue === 'renameDialogue' ? (
+    state.showDialogue === "renameDialogue" ? (
       <InputDialogue
         props={{
-          label: 'File/Folder',
-          type: 'text',
-          icon: 'bi-file',
-          title: 'Rename File or Folder',
+          label: "File/Folder",
+          type: "text",
+          icon: "bi-file",
+          title: "Rename File or Folder",
           defaultValue: state.selectedItem,
           onSave: onRename,
           onClose: () => dispatch({ type: ActionType.HIDE_DIALOGUE }),

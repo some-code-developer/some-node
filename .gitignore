@@ -134,4 +134,8 @@ dist
 *.dll
 yarn.lock
 SomeNode/
+
 public/
+audit.json*
+backend/data/log/audit.json
+backend/public/index.html

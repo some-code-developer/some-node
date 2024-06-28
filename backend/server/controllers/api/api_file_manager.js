@@ -54,7 +54,7 @@ router.post("/delete", (req, res) => {
   try {
     const item = path.join(filesFolder, selectedPath, selectedItem);
     if (fs.lstatSync(item).isFile()) fs.unlinkSync(item);
-    else fs.rmdirSync(item, { recursive: true });
+    else fs.rmSync(item, { recursive: true });
 
     const folder = path.join(filesFolder, selectedPath);
     const files = listFolder(folder);

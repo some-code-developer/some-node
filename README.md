@@ -4,6 +4,7 @@ This project demonstrates creating the same application using various frameworks
 
 - React Vanilla js + Bootstrap Css and Icons
 - React Typescript + Bootstrap Css and Icons
+- React Typescript + Tailwind Css and Bootstrap Icons
 
 Application can be run on windows and linux
 

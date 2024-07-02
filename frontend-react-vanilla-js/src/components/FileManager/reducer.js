@@ -8,6 +8,7 @@ export const reducer = (state, action) => {
         data: action.payload.data,
         isLoading: false,
         selectedPath: action.payload.selectedPath,
+        showDialogue: undefined,
       };
 
     case TYPES.SET_ERROR:

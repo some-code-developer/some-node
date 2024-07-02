@@ -4,7 +4,7 @@ import { useStickyState } from "@hooks/index";
 import { getErrorMessage } from "@utils/form_utils";
 
 // Components
-import { ErrorMessage, Layout } from "@shared/index";
+import { ErrorMessage, Layout, ConfirmDialogue } from "@shared/index";
 import PathToolbar from "./PathToolbar";
 import { UploadDialogue, InputDialogue } from "@dialogs/index";
 import { postJSON } from "../utils/form_utils";
@@ -168,26 +168,25 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
   };
 
   const onDelete = async (item: string) => {
-    if (confirm(`Delete file/folder ${item} ?`))
-      try {
-        dispatch({ type: ActionType.SET_LOADING });
-        const response = await postJSON("/api/file-manager/delete", {
-          selectedPath: state.selectedPath,
-          selectedItem: item,
-        });
-        const responseData = await response.json();
-        if (response.status === 200)
-          dispatch({
-            type: ActionType.SET_DATA,
-            payload: { data: responseData, selectedPath: state.selectedPath },
-          });
-        else throw new Error(responseData.error);
-      } catch (err) {
+    try {
+      dispatch({ type: ActionType.SET_LOADING });
+      const response = await postJSON("/api/file-manager/delete", {
+        selectedPath: state.selectedPath,
+        selectedItem: state.selectedItem,
+      });
+      const responseData = await response.json();
+      if (response.status === 200)
         dispatch({
-          type: ActionType.SET_ERROR,
-          payload: { error: getErrorMessage(err) },
+          type: ActionType.SET_DATA,
+          payload: { data: responseData, selectedPath: state.selectedPath },
         });
-      }
+      else throw new Error(responseData.error);
+    } catch (err) {
+      dispatch({
+        type: ActionType.SET_ERROR,
+        payload: { error: getErrorMessage(err) },
+      });
+    }
   };
 
   const renderTable = (): ReactElement => {
@@ -320,7 +319,7 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
                       type="button"
                       className="bi-x border-b border-r border-t border-gray-200 bg-white px-4 py-1 text-sm text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white dark:focus:text-white dark:focus:ring-blue-500"
                       title="Delete"
-                      onClick={() => onDelete(record.name)}
+                      onClick={() => onShowDeleteDialogue(record.name)}
                     />
                   </div>
                 </td>
@@ -533,6 +532,25 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
       />
     ) : null;
 
+  const onShowDeleteDialogue = async (item: string) => {
+    dispatch({ type: ActionType.SET_ITEM, payload: { selectedItem: item } });
+    dispatch({
+      type: ActionType.SHOW_DIALOGUE,
+      payload: { showDialogue: "deleteDialogue" },
+    });
+  };
+
+  const deleteDialogue =
+    state.showDialogue === "deleteDialogue" ? (
+      <ConfirmDialogue
+        props={{
+          question: `Delete file/folder ${getFile()}?`,
+          onCancel: () => dispatch({ type: ActionType.HIDE_DIALOGUE }),
+          onOK: onDelete,
+        }}
+      />
+    ) : null;
+
   return (
     <>
       <Layout
@@ -545,6 +563,7 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
         {uploadDialogue}
         {createFolderDialogue}
         {renameDialogue}
+        {deleteDialogue}
       </Layout>
     </>
   );

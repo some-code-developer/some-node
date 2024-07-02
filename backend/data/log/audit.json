@@ -9,6 +9,11 @@
             "date": 1719488267281,
             "name": "/home/dbsl/NODE/some-node/backend/data/log/2024-06-27.log",
             "hash": "b918f064fafdfce0a58e2369a9ceeee958e51a896706146da6d02b5fea28f565"
+        },
+        {
+            "date": 1719913269302,
+            "name": "/home/dbsl/NODE/some-node/backend/data/log/2024-07-02.log",
+            "hash": "1067a3b87992dd41114e6031360a681bf4873065cbca53a1bb195da13e7ef257"
         }
     ],
     "hashType": "sha256"

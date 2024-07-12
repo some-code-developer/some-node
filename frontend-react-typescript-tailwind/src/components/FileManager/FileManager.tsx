@@ -167,7 +167,7 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
     }
   };
 
-  const onDelete = async (item: string) => {
+  const onDelete = async () => {
     try {
       dispatch({ type: ActionType.SET_LOADING });
       const response = await postJSON("/api/file-manager/delete", {

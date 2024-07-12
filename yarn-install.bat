@@ -1,0 +1,12 @@
+CD backend
+call yarn
+CD ..
+CD frontend-react-typescript
+call yarn
+CD ..
+CD frontend-react-typescript-tailwind
+call yarn
+CD ..
+CD frontend-react-vanilla-js
+call yarn
+CD ..

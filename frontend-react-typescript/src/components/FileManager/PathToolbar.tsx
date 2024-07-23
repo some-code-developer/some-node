@@ -11,7 +11,8 @@ interface IPathToolbarProps {
 const PathToolbar: FC<IPathToolbarProps> = ({ props }) => {
   const { path, onPathClick } = props;
 
-  const folders = path?.split('/');
+  const folders = path ? path.split("/") : [""];
+
   folders[0] = '/';
   if (folders.length > 1) folders.pop();
 

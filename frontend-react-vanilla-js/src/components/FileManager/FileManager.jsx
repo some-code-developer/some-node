@@ -274,7 +274,10 @@ function FileManager({ props }) {
     );
   };
 
-  const getFile = () => (state.selectedPath === "/" ? `${state.selectedPath}${state.selectedItem}` : `${state.selectedPath}/${state.selectedItem}`);
+  const getFile = () =>
+    state.selectedPath === "/"
+      ? `${state.selectedPath ? state.selectedPath : ""}${state.selectedItem}`
+      : `${state.selectedPath ? state.selectedPath : ""}/${state.selectedItem}`;
 
   const body = (
     <>

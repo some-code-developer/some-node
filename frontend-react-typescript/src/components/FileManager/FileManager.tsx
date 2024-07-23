@@ -280,7 +280,9 @@ const FileManager: FC<IFileManagerProps> = ({ props }) => {
   };
 
   const getFile = (): string =>
-    state.selectedPath === "/" ? `${state.selectedPath}${state.selectedItem}` : `${state.selectedPath}/${state.selectedItem}`;
+    state.selectedPath === "/"
+      ? `${state.selectedPath ? state.selectedPath : ""}${state.selectedItem}`
+      : `${state.selectedPath ? state.selectedPath : ""}/${state.selectedItem}`;
 
   const body = (
     <>

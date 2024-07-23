@@ -3,7 +3,7 @@ import PathButton from "./PathButton";
 function PathToolbar({ props }) {
   const { path, onPathClick } = props;
 
-  const folders = path.split("/");
+  const folders = path ? path.split("/") : [""];
   folders[0] = "/";
   if (folders.length > 1) folders.pop();
 
@@ -17,12 +17,7 @@ function PathToolbar({ props }) {
     <div className="btn-group btn-group-sm border me-2" role="group">
       {folders &&
         folders.map((item, i) => {
-          return (
-            <PathButton
-              key={i}
-              props={{ item, path: getPath(i), onPathClick }}
-            />
-          );
+          return <PathButton key={i} props={{ item, path: getPath(i), onPathClick }} />;
         })}
     </div>
   );
